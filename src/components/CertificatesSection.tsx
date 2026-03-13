@@ -4,11 +4,15 @@ import SectionTitle from "./SectionTitle";
 import certMl from "@/assets/cert-ml.jpg";
 import certDl from "@/assets/cert-dl.jpg";
 import certAws from "@/assets/cert-aws.jpg";
+import certPython from "@/assets/cert-python.jpg";
+import certData from "@/assets/cert-data.jpg";
 
 const certificates = [
   { title: "Machine Learning Specialization", issuer: "Coursera / Stanford", year: "2024", image: certMl },
   { title: "Deep Learning Specialization", issuer: "Coursera / DeepLearning.ai", year: "2024", image: certDl },
   { title: "AWS Cloud Practitioner", issuer: "Amazon Web Services", year: "2024", image: certAws },
+  { title: "Python for Data Science", issuer: "Coursera / IBM", year: "2023", image: certPython },
+  { title: "Data Science Professional", issuer: "Coursera / Google", year: "2024", image: certData },
 ];
 
 const CertificatesSection = () => (
