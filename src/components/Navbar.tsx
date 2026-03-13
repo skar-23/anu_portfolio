@@ -19,7 +19,7 @@ const Navbar = () => {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-card/80 backdrop-blur-lg border-b border-border">
       <div className="max-w-6xl mx-auto flex items-center justify-between px-4 md:px-8 h-16">
         <a href="#home" className="font-heading font-bold text-xl text-heading">
-          Anu<span className="gradient-text">Kumari</span>
+          <span className="gradient-text">DAK</span>
         </a>
         <div className="hidden md:flex gap-6">
           {navItems.map((item) => (
