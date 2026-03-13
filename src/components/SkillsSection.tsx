@@ -2,6 +2,25 @@ import { Code, Brain, Wrench, Users } from "lucide-react";
 import SectionWrapper from "./SectionWrapper";
 import SectionTitle from "./SectionTitle";
 
+const skillIcons: Record<string, string> = {
+  // Programming Languages
+  Python: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
+  "C++": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg",
+  JavaScript: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
+  Java: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg",
+  C: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg",
+  // ML Frameworks
+  TensorFlow: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg",
+  "Scikit-learn": "https://upload.wikimedia.org/wikipedia/commons/0/05/Scikit_learn_logo_small.svg",
+  // Tools
+  AWS: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg",
+  Firebase: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg",
+  MySQL: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg",
+  NumPy: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg",
+  Pandas: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg",
+  Git: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg",
+};
+
 const skillGroups = [
   {
     title: "Programming Languages",
@@ -39,8 +58,11 @@ const SkillsSection = () => (
             {group.skills.map((skill) => (
               <span
                 key={skill}
-                className="px-3 py-1.5 text-sm font-medium rounded-full bg-muted text-foreground"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium rounded-full bg-muted text-foreground"
               >
+                {skillIcons[skill] && (
+                  <img src={skillIcons[skill]} alt={skill} className="w-4 h-4" />
+                )}
                 {skill}
               </span>
             ))}
