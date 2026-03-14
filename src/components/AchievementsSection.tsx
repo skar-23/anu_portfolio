@@ -12,17 +12,17 @@ const achievements = [
 const AchievementsSection = () => (
   <SectionWrapper id="achievements">
     <SectionTitle title="Achievements" subtitle="Milestones and recognition" />
-    <div className="max-w-2xl mx-auto relative">
-      <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-border" />
-      <div className="space-y-8">
+    <div className="max-w-3xl mx-auto">
+      <div className="space-y-6">
         {achievements.map((a, i) => (
-          <div key={i} className="relative flex items-start gap-6 pl-2">
-            <div className="relative z-10 w-10 h-10 rounded-full gradient-primary flex items-center justify-center shrink-0 mt-1">
-              <a.icon size={18} className="text-primary-foreground" />
+          <div key={i} className="flex items-start gap-5 bg-card rounded-2xl p-6 card-hover border border-border relative overflow-hidden group">
+            <div className="absolute top-0 left-0 w-1 h-full gradient-primary" />
+            <div className="relative z-10 w-12 h-12 rounded-xl gradient-primary flex items-center justify-center shrink-0">
+              <a.icon size={20} className="text-primary-foreground" />
             </div>
-            <div className="bg-card rounded-xl p-5 shadow-md card-hover flex-1 border border-border">
-              <h3 className="font-heading font-bold text-heading mb-1">{a.title}</h3>
-              <p className="text-sm text-muted-foreground">{a.desc}</p>
+            <div className="pl-2">
+              <h3 className="font-heading font-bold text-heading text-lg mb-1">{a.title}</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">{a.desc}</p>
             </div>
           </div>
         ))}
