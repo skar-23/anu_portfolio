@@ -1,71 +1,115 @@
 import { motion } from "framer-motion";
-import { Mail, FileText } from "lucide-react";
-import ParticleBackground from "./ParticleBackground";
+import { Mail, FileText, Flame } from "lucide-react";
 import profilePhoto from "@/assets/profile-photo.jpg";
 
+const stats = [
+  { value: "4+", label: "PROJECTS" },
+  { value: "15+", label: "REPOSITORIES" },
+  { value: "100+", label: "PROBLEMS SOLVED" },
+];
+
 const HeroSection = () => (
-  <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
-    <ParticleBackground />
-    <div className="relative z-10 max-w-4xl mx-auto text-center px-4">
-      <motion.div
-        initial={{ scale: 0.8, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 0.6 }}
-        className="mb-8"
-      >
-        <div className="relative inline-block animate-float-profile">
-          <div className="w-40 h-40 md:w-48 md:h-48 rounded-full overflow-hidden border-4 border-primary/30 glow-primary mx-auto">
-            <img src={profilePhoto} alt="Donipati Anu Kumari" className="w-full h-full object-cover" />
+  <section id="home" className="relative min-h-screen flex items-center overflow-hidden pt-16">
+    <div className="relative z-10 max-w-6xl mx-auto w-full px-4 md:px-8 py-12">
+      <div className="grid md:grid-cols-2 gap-12 items-center">
+        {/* Left - Photo Card */}
+        <motion.div
+          initial={{ x: -60, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 0.7 }}
+          className="flex justify-center md:justify-start"
+        >
+          <div className="relative">
+            {/* Dashed circle decoration */}
+            <div className="absolute -top-8 -left-8 w-[calc(100%+4rem)] h-[calc(100%+4rem)] pointer-events-none">
+              <svg viewBox="0 0 400 400" className="w-full h-full animate-rotate-slow">
+                <circle
+                  cx="200" cy="200" r="180"
+                  fill="none"
+                  stroke="hsl(25 100% 55%)"
+                  strokeWidth="3"
+                  strokeDasharray="15 12"
+                  opacity="0.6"
+                />
+              </svg>
+            </div>
+            <div className="bg-card rounded-2xl p-4 shadow-2xl relative z-10 max-w-xs">
+              <div className="rounded-xl overflow-hidden mb-4">
+                <img src={profilePhoto} alt="Donipati Anu Kumari" className="w-full h-72 object-cover" />
+              </div>
+              <h3 className="font-heading font-bold text-xl text-heading px-1">Donipati Anu Kumari</h3>
+              <div className="flex items-center gap-2 px-1 mt-1">
+                <Flame size={18} className="text-primary" />
+                <span className="text-sm text-muted-foreground">ML Enthusiast</span>
+              </div>
+            </div>
           </div>
+        </motion.div>
+
+        {/* Right - Text Content */}
+        <div>
+          <motion.div
+            initial={{ y: 30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.2, duration: 0.6 }}
+          >
+            <h1 className="text-5xl md:text-7xl font-heading font-bold leading-tight mb-2">
+              MACHINE
+              <br />
+              <span className="text-muted-foreground">LEARNING</span>
+            </h1>
+            <h2 className="text-2xl md:text-3xl font-heading font-bold text-muted-foreground mb-6">
+              ENGINEER
+            </h2>
+          </motion.div>
+
+          <motion.p
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.4, duration: 0.6 }}
+            className="text-muted-foreground text-base md:text-lg mb-8 max-w-md leading-relaxed"
+          >
+            Passionate about building intelligent solutions using Machine Learning and AI. Specialize in transforming data into impactful, real-world applications.
+          </motion.p>
+
+          <motion.div
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.5, duration: 0.6 }}
+            className="flex flex-wrap gap-4 mb-12"
+          >
+            <a
+              href="#contact"
+              className="inline-flex items-center justify-center gap-2 px-8 py-3 rounded-full gradient-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity"
+            >
+              <Mail size={18} /> Get In Touch
+            </a>
+            <a
+              href="#resume"
+              className="inline-flex items-center justify-center gap-2 px-8 py-3 rounded-full border-2 border-border text-foreground font-semibold hover:border-primary hover:text-primary transition-colors"
+            >
+              <FileText size={18} /> View Resume
+            </a>
+          </motion.div>
+
+          {/* Stats */}
+          <motion.div
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.6, duration: 0.6 }}
+            className="flex gap-8 md:gap-12"
+          >
+            {stats.map((s, i) => (
+              <div key={i} className="text-center">
+                <div className="text-3xl md:text-4xl font-heading font-bold text-heading">
+                  {s.value.replace('+', '')}<span className="gradient-accent">+</span>
+                </div>
+                <p className="text-xs md:text-sm text-muted-foreground tracking-wider mt-1">{s.label}</p>
+              </div>
+            ))}
+          </motion.div>
         </div>
-      </motion.div>
-
-      <motion.h1
-        initial={{ y: 30, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.2, duration: 0.6 }}
-        className="text-4xl md:text-6xl font-heading font-bold mb-4"
-      >
-        Donipati <span className="gradient-text">Anu Kumari</span>
-      </motion.h1>
-
-      <motion.p
-        initial={{ y: 20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.4, duration: 0.6 }}
-        className="text-lg md:text-xl text-primary font-medium mb-4"
-      >
-        Machine Learning Enthusiast | Computer Science Student
-      </motion.p>
-
-      <motion.p
-        initial={{ y: 20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.5, duration: 0.6 }}
-        className="text-muted-foreground text-base md:text-lg mb-8 max-w-xl mx-auto"
-      >
-        Building intelligent solutions using Machine Learning and Artificial Intelligence.
-      </motion.p>
-
-      <motion.div
-        initial={{ y: 20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.6, duration: 0.6 }}
-        className="flex flex-col sm:flex-row gap-4 justify-center"
-      >
-        <a
-          href="#contact"
-          className="inline-flex items-center justify-center gap-2 px-8 py-3 rounded-full gradient-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity"
-        >
-          <Mail size={18} /> Get In Touch
-        </a>
-        <a
-          href="#resume"
-          className="inline-flex items-center justify-center gap-2 px-8 py-3 rounded-full border-2 border-primary text-primary font-semibold hover:bg-primary hover:text-primary-foreground transition-colors"
-        >
-          <FileText size={18} /> View Resume
-        </a>
-      </motion.div>
+      </div>
     </div>
   </section>
 );

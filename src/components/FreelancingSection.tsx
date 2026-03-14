@@ -5,7 +5,7 @@ import SectionTitle from "./SectionTitle";
 const FreelancingSection = () => (
   <SectionWrapper id="experience">
     <SectionTitle title="Freelancing Experience" />
-    <div className="max-w-3xl mx-auto bg-card rounded-2xl p-8 shadow-lg card-hover">
+    <div className="max-w-3xl mx-auto bg-card rounded-2xl p-8 shadow-lg card-hover border border-border">
       <div className="flex items-start gap-4">
         <div className="w-14 h-14 rounded-xl gradient-primary flex items-center justify-center shrink-0">
           <Briefcase size={24} className="text-primary-foreground" />
@@ -23,7 +23,7 @@ const FreelancingSection = () => (
               "Improved recommendation accuracy by 82%",
             ].map((item, i) => (
               <li key={i} className="flex items-start gap-2 text-foreground">
-                <CheckCircle size={18} className="text-primary mt-0.5 shrink-0" />
+                <CheckCircle size={18} className="text-accent mt-0.5 shrink-0" />
                 <span>{item}</span>
               </li>
             ))}

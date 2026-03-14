@@ -26,7 +26,7 @@ const ParticleBackground = () => {
         vx: (Math.random() - 0.5) * 0.5,
         vy: (Math.random() - 0.5) * 0.5,
         size: Math.random() * 3 + 1,
-        opacity: Math.random() * 0.4 + 0.1,
+        opacity: Math.random() * 0.3 + 0.05,
       });
     }
 
@@ -39,7 +39,7 @@ const ParticleBackground = () => {
         if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255, 122, 110, ${p.opacity})`;
+        ctx.fillStyle = `rgba(217, 119, 6, ${p.opacity})`;
         ctx.fill();
       });
       animationId = requestAnimationFrame(animate);
