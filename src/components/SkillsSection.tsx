@@ -30,16 +30,17 @@ const SkillsSection = () => (
     <SectionTitle title="Skills" subtitle="Technologies and tools I work with" />
     <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
       {skillGroups.map((group, i) => (
-        <div key={i} className="bg-card rounded-2xl p-6 shadow-md card-hover border border-border">
-          <div className="w-12 h-12 rounded-xl gradient-primary flex items-center justify-center mb-4">
+        <div key={i} className="bg-card rounded-2xl p-7 card-hover border border-border relative overflow-hidden group">
+          <div className="absolute top-0 left-0 w-full h-1 gradient-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          <div className="w-12 h-12 rounded-xl gradient-primary flex items-center justify-center mb-5">
             <group.icon size={22} className="text-primary-foreground" />
           </div>
-          <h3 className="font-heading font-bold text-heading mb-4">{group.title}</h3>
+          <h3 className="font-heading font-bold text-heading text-lg mb-5">{group.title}</h3>
           <div className="flex flex-wrap gap-2">
             {group.skills.map((skill) => (
               <span
                 key={skill}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium rounded-full bg-secondary text-foreground"
+                className="inline-flex items-center gap-1.5 px-3 py-2 text-sm font-medium rounded-lg bg-secondary text-foreground border border-border hover:border-primary/50 transition-colors"
               >
                 {skillIcons[skill] && <img src={skillIcons[skill]} alt={skill} className="w-4 h-4" />}
                 {skill}

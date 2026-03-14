@@ -1,4 +1,4 @@
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, Award } from "lucide-react";
 import SectionWrapper from "./SectionWrapper";
 import SectionTitle from "./SectionTitle";
 import certMl from "@/assets/cert-ml.jpg";
@@ -20,17 +20,21 @@ const CertificatesSection = () => (
     <SectionTitle title="Certificates" subtitle="Professional certifications and courses" />
     <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
       {certificates.map((c, i) => (
-        <div key={i} className="bg-card rounded-2xl overflow-hidden shadow-lg card-hover border border-border group">
-          <div className="h-44 overflow-hidden">
+        <div key={i} className="bg-card rounded-2xl overflow-hidden card-hover border border-border group relative">
+          <div className="h-48 overflow-hidden relative">
             <img src={c.image} alt={c.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+            <div className="absolute inset-0 bg-gradient-to-t from-card to-transparent" />
+            <div className="absolute top-4 right-4 w-10 h-10 rounded-full gradient-primary flex items-center justify-center">
+              <Award size={18} className="text-primary-foreground" />
+            </div>
           </div>
-          <div className="p-6">
-            <h3 className="font-heading font-bold text-heading mb-1">{c.title}</h3>
+          <div className="p-7">
+            <h3 className="font-heading font-bold text-heading text-lg mb-1">{c.title}</h3>
             <p className="text-sm text-muted-foreground mb-1">{c.issuer}</p>
-            <p className="text-sm text-accent font-semibold mb-4">{c.year}</p>
+            <p className="text-sm text-primary font-bold mb-5">{c.year}</p>
             <a
               href="#"
-              className="inline-flex items-center gap-1.5 px-5 py-2 text-sm font-medium rounded-full gradient-primary text-primary-foreground hover:opacity-90 transition-opacity"
+              className="inline-flex items-center gap-1.5 px-5 py-2.5 text-sm font-semibold rounded-full gradient-primary text-primary-foreground hover:opacity-90 transition-opacity"
             >
               <ExternalLink size={14} /> View Certificate
             </a>

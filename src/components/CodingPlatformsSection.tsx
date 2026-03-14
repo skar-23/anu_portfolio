@@ -38,17 +38,18 @@ const CodingPlatformsSection = () => (
     <SectionTitle title="Coding Platforms" subtitle="Where I practice and compete" />
     <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
       {platforms.map((p, i) => (
-        <div key={i} className="bg-card rounded-2xl p-6 shadow-md card-hover text-center border border-border">
-          <div className={`w-14 h-14 ${p.color} rounded-xl flex items-center justify-center mx-auto mb-4`}>
-            <img src={p.icon} alt={p.name} className="w-7 h-7 invert" />
+        <div key={i} className="bg-card rounded-2xl p-7 card-hover text-center border border-border relative overflow-hidden group">
+          <div className="absolute top-0 left-0 w-full h-1 gradient-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          <div className={`w-16 h-16 ${p.color} rounded-2xl flex items-center justify-center mx-auto mb-5`}>
+            <img src={p.icon} alt={p.name} className="w-8 h-8 invert" />
           </div>
-          <h3 className="font-heading font-bold text-heading mb-3">{p.name}</h3>
+          <h3 className="font-heading font-bold text-heading text-lg mb-3">{p.name}</h3>
           {p.details.map((d, j) => (
-            <p key={j} className="text-sm text-muted-foreground">{d}</p>
+            <p key={j} className="text-sm text-muted-foreground leading-relaxed">{d}</p>
           ))}
           <a
             href={p.url}
-            className="inline-flex items-center gap-1.5 mt-4 px-5 py-2 text-sm font-medium rounded-full gradient-primary text-primary-foreground hover:opacity-90 transition-opacity"
+            className="inline-flex items-center gap-1.5 mt-5 px-6 py-2.5 text-sm font-semibold rounded-full gradient-primary text-primary-foreground hover:opacity-90 transition-opacity"
           >
             <ExternalLink size={14} /> Profile
           </a>

@@ -28,20 +28,23 @@ const EducationSection = () => (
     <SectionTitle title="Education" subtitle="My academic journey" />
     <div className="grid md:grid-cols-2 gap-8">
       {educationData.map((ed, i) => (
-        <div key={i} className="bg-card rounded-2xl overflow-hidden shadow-lg card-hover border border-border">
-          <div className="h-48 overflow-hidden">
-            <img src={ed.image} alt={ed.school} className="w-full h-full object-cover" />
+        <div key={i} className="bg-card rounded-2xl overflow-hidden card-hover border border-border group">
+          <div className="h-52 overflow-hidden relative">
+            <img src={ed.image} alt={ed.school} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+            <div className="absolute inset-0 bg-gradient-to-t from-card to-transparent" />
           </div>
-          <div className="p-6">
-            <div className="flex items-center gap-2 mb-2">
-              <GraduationCap size={20} className="text-primary" />
+          <div className="p-7">
+            <div className="flex items-center gap-3 mb-3">
+              <div className="w-10 h-10 rounded-lg gradient-primary flex items-center justify-center shrink-0">
+                <GraduationCap size={18} className="text-primary-foreground" />
+              </div>
               <h3 className="font-heading font-bold text-lg text-heading">{ed.school}</h3>
             </div>
             <p className="font-medium text-foreground mb-1">{ed.degree}</p>
-            <p className="text-accent font-semibold mb-3">{ed.score}</p>
+            <p className="text-primary font-bold text-lg mb-4">{ed.score}</p>
             <div className="flex items-center gap-4 text-sm text-muted-foreground">
-              <span className="flex items-center gap-1"><Calendar size={14} /> {ed.period}</span>
-              <span className="flex items-center gap-1"><MapPin size={14} /> {ed.location}</span>
+              <span className="flex items-center gap-1.5"><Calendar size={14} className="text-primary" /> {ed.period}</span>
+              <span className="flex items-center gap-1.5"><MapPin size={14} className="text-primary" /> {ed.location}</span>
             </div>
           </div>
         </div>
