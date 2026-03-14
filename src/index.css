@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,50 +6,50 @@
 
 @layer base {
   :root {
-    --background: 10 100% 97%;
-    --foreground: 15 30% 15%;
+    --background: 240 10% 6%;
+    --foreground: 0 0% 90%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 15 30% 15%;
+    --card: 240 8% 10%;
+    --card-foreground: 0 0% 90%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 15 30% 15%;
+    --popover: 240 8% 10%;
+    --popover-foreground: 0 0% 90%;
 
-    --primary: 4 100% 71%;
+    --primary: 25 100% 55%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 10 100% 83%;
-    --secondary-foreground: 15 30% 15%;
+    --secondary: 240 6% 16%;
+    --secondary-foreground: 0 0% 80%;
 
-    --muted: 10 60% 94%;
-    --muted-foreground: 15 10% 50%;
+    --muted: 240 6% 14%;
+    --muted-foreground: 240 5% 55%;
 
-    --accent: 10 100% 83%;
-    --accent-foreground: 15 30% 15%;
+    --accent: 142 70% 45%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 10 30% 90%;
-    --input: 10 30% 90%;
-    --ring: 4 100% 71%;
+    --border: 240 6% 18%;
+    --input: 240 6% 18%;
+    --ring: 25 100% 55%;
 
     --radius: 0.75rem;
 
-    --heading: 15 40% 20%;
-    --coral-glow: 4 100% 71%;
+    --heading: 0 0% 95%;
+    --coral-glow: 25 100% 55%;
 
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-background: 240 8% 8%;
+    --sidebar-foreground: 0 0% 90%;
+    --sidebar-primary: 0 0% 95%;
     --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-accent: 240 6% 14%;
+    --sidebar-accent-foreground: 0 0% 90%;
+    --sidebar-border: 240 6% 18%;
+    --sidebar-ring: 25 100% 55%;
 
     --font-heading: 'Space Grotesk', sans-serif;
-    --font-body: 'Plus Jakarta Sans', sans-serif;
+    --font-body: 'Inter', sans-serif;
   }
 }
 
@@ -82,11 +82,18 @@
   }
 
   .gradient-primary {
-    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)));
+    background: linear-gradient(135deg, hsl(var(--primary)), hsl(35 100% 60%));
   }
 
   .gradient-text {
-    background: linear-gradient(135deg, hsl(var(--primary)), hsl(15 80% 55%));
+    background: linear-gradient(135deg, hsl(var(--primary)), hsl(35 100% 65%));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .gradient-accent {
+    background: linear-gradient(135deg, hsl(var(--accent)), hsl(160 70% 45%));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -96,13 +103,17 @@
     box-shadow: 0 0 40px hsl(var(--primary) / 0.3), 0 0 80px hsl(var(--primary) / 0.1);
   }
 
+  .glow-accent {
+    box-shadow: 0 0 30px hsl(var(--accent) / 0.2);
+  }
+
   .card-hover {
     @apply transition-all duration-300;
   }
 
   .card-hover:hover {
     transform: translateY(-6px);
-    box-shadow: 0 20px 40px hsl(var(--primary) / 0.15);
+    box-shadow: 0 20px 40px hsl(var(--primary) / 0.1);
   }
 
   .section-padding {
@@ -110,12 +121,14 @@
   }
 }
 
-/* Particle animation */
-@keyframes float {
-  0%, 100% { transform: translateY(0) translateX(0); }
-  25% { transform: translateY(-20px) translateX(10px); }
-  50% { transform: translateY(-10px) translateX(-5px); }
-  75% { transform: translateY(-30px) translateX(15px); }
+/* Dashed circle animation */
+@keyframes rotate-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-rotate-slow {
+  animation: rotate-slow 20s linear infinite;
 }
 
 @keyframes float-profile {

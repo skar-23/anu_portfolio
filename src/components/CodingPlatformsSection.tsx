@@ -13,7 +13,7 @@ const platforms = [
   {
     name: "GitHub",
     icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg",
-    color: "bg-gray-800",
+    color: "bg-secondary",
     details: ["Active contributor", "Open source projects"],
     url: "#",
   },
@@ -38,7 +38,7 @@ const CodingPlatformsSection = () => (
     <SectionTitle title="Coding Platforms" subtitle="Where I practice and compete" />
     <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
       {platforms.map((p, i) => (
-        <div key={i} className="bg-card rounded-2xl p-6 shadow-md card-hover text-center">
+        <div key={i} className="bg-card rounded-2xl p-6 shadow-md card-hover text-center border border-border">
           <div className={`w-14 h-14 ${p.color} rounded-xl flex items-center justify-center mx-auto mb-4`}>
             <img src={p.icon} alt={p.name} className="w-7 h-7 invert" />
           </div>

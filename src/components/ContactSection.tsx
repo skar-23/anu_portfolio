@@ -28,7 +28,7 @@ const ContactSection = () => {
             <a
               key={i}
               href={c.href}
-              className="flex items-center gap-4 bg-card rounded-xl p-4 shadow-md card-hover"
+              className="flex items-center gap-4 bg-card rounded-xl p-4 shadow-md card-hover border border-border"
             >
               <div className="w-11 h-11 rounded-lg gradient-primary flex items-center justify-center shrink-0">
                 <c.icon size={20} className="text-primary-foreground" />
@@ -40,10 +40,10 @@ const ContactSection = () => {
             </a>
           ))}
         </div>
-        <div className="bg-card rounded-2xl p-6 shadow-lg">
+        <div className="bg-card rounded-2xl p-6 shadow-lg border border-border">
           {submitted ? (
             <div className="flex flex-col items-center justify-center h-full gap-3 py-12">
-              <CheckCircle size={48} className="text-primary" />
+              <CheckCircle size={48} className="text-accent" />
               <p className="font-heading font-bold text-heading text-lg">Message Sent!</p>
               <p className="text-muted-foreground text-sm">Thank you for reaching out.</p>
             </div>
@@ -54,7 +54,7 @@ const ContactSection = () => {
                 <input
                   type="text"
                   required
-                  className="w-full px-4 py-2.5 rounded-lg border border-input bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+                  className="w-full px-4 py-2.5 rounded-lg border border-input bg-secondary text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
                   placeholder="Your name"
                 />
               </div>
@@ -63,7 +63,7 @@ const ContactSection = () => {
                 <input
                   type="email"
                   required
-                  className="w-full px-4 py-2.5 rounded-lg border border-input bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+                  className="w-full px-4 py-2.5 rounded-lg border border-input bg-secondary text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
                   placeholder="your@email.com"
                 />
               </div>
@@ -72,7 +72,7 @@ const ContactSection = () => {
                 <textarea
                   required
                   rows={4}
-                  className="w-full px-4 py-2.5 rounded-lg border border-input bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-ring resize-none"
+                  className="w-full px-4 py-2.5 rounded-lg border border-input bg-secondary text-foreground focus:outline-none focus:ring-2 focus:ring-ring resize-none"
                   placeholder="Your message..."
                 />
               </div>
