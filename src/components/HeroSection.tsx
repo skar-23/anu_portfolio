@@ -26,7 +26,7 @@ const HeroSection = () => (
                 <circle
                   cx="200" cy="200" r="180"
                   fill="none"
-                  stroke="hsl(25 100% 55%)"
+                  stroke="hsl(280 80% 60%)"
                   strokeWidth="3"
                   strokeDasharray="15 12"
                   opacity="0.6"

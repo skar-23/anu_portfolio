@@ -39,7 +39,7 @@ const ParticleBackground = () => {
         if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(217, 119, 6, ${p.opacity})`;
+        ctx.fillStyle = `rgba(168, 85, 247, ${p.opacity})`;
         ctx.fill();
       });
       animationId = requestAnimationFrame(animate);
