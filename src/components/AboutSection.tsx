@@ -25,6 +25,8 @@ const values = [
   { emoji: "📚", label: "Learning Mindset", desc: "Continuously improving my skills" },
   { emoji: "🤝", label: "Collaboration", desc: "Working effectively with others to build better products" },
 ];
+
+const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 24 },
   whileInView: { opacity: 1, y: 0 },
   viewport: { once: true },
