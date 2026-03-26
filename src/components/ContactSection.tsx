@@ -17,7 +17,7 @@ const ContactSection = () => {
     e.preventDefault();
     const form = e.currentTarget;
     const data = new FormData(form);
-    const res = await fetch(`https://formspree.io/f/${import.meta.env.VITE_FORMSPREE_ID}`, {
+    const res = await fetch("https://formspree.io/f/mnjoqeqj", {
       method: "POST",
       body: data,
       headers: { Accept: "application/json" },
