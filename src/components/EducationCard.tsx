@@ -45,11 +45,8 @@ export default function EducationCard({ image, school, degree, score, period, lo
         </h2>
         <p className="text-white/70 text-sm md:text-base mb-4 font-medium">{degree}</p>
 
-        {/* Score + meta */}
+        {/* meta */}
         <div className="flex flex-wrap items-center gap-3 mb-4">
-          <span className="px-4 py-1.5 rounded-xl bg-primary/20 border border-primary/30 text-primary font-bold text-sm backdrop-blur-sm">
-            {score}
-          </span>
           <span className="flex items-center gap-1.5 text-white/60 text-xs font-semibold">
             <Calendar size={13} className="text-primary/70" /> {period}
           </span>
