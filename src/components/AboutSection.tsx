@@ -20,7 +20,12 @@ const offCoding = [
   { icon: Gamepad2, label: "Gaming" },
 ];
 
-const fadeUp = (delay = 0) => ({
+const values = [
+  { emoji: "✨", label: "Simplicity", desc: "Building solutions that are easy to understand and use" },
+  { emoji: "🔁", label: "Consistency", desc: "Writing structured and reliable code" },
+  { emoji: "📚", label: "Learning Mindset", desc: "Continuously improving my skills" },
+  { emoji: "🤝", label: "Collaboration", desc: "Working effectively with others to build better products" },
+];
   initial: { opacity: 0, y: 24 },
   whileInView: { opacity: 1, y: 0 },
   viewport: { once: true },
@@ -100,6 +105,23 @@ const AboutSection = () => (
           </div>
         </motion.div>
       </div>
+
+      {/* My Approach */}
+      <motion.div {...fadeUp(0.4)} className="glass-card rounded-2xl p-6 md:p-8 mt-6">
+        <h3 className="font-heading font-bold text-lg text-heading mb-2">🧭 My Approach</h3>
+        <p className="text-sm text-muted-foreground mb-6 max-w-2xl">
+          I believe technology should not only work efficiently but also create real value for users. For me, development is not just about coding — it's about creating meaningful experiences that combine logic, creativity, and usability.
+        </p>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {values.map((v, i) => (
+            <div key={i} className="flex flex-col gap-1 p-4 rounded-xl bg-white/5 border border-white/10">
+              <span className="text-xl mb-1">{v.emoji}</span>
+              <span className="font-semibold text-sm text-foreground">{v.label}</span>
+              <span className="text-xs text-muted-foreground">{v.desc}</span>
+            </div>
+          ))}
+        </div>
+      </motion.div>
     </div>
   </SectionWrapper>
 );
