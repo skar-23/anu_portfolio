@@ -47,7 +47,7 @@ const ResumeSection = () => (
             download="Donipati_Anu_Kumari_Resume.pdf"
             className="inline-flex items-center justify-center gap-2 px-7 sm:px-10 py-3.5 sm:py-4 rounded-full border-2 border-primary/30 text-foreground font-bold text-sm sm:text-base hover:border-primary hover:text-primary hover:scale-105 transition-all duration-300 frost-badge"
           >
-            <Download size={18} /> Download PDF
+            <Download size={18} /> Download My Resume
           </a>
         </div>
       </motion.div>
