@@ -61,19 +61,15 @@ const AboutSection = () => (
             <MapPin size={18} className="text-primary" />
             <h3 className="font-heading font-bold text-lg text-heading">My Journey</h3>
           </div>
-          <div className="space-y-3">
-            {[
-              { year: "2020–22", text: "Completed +2 at Kendriya Vidyalaya, Odisha" },
-              { year: "2023", text: "Joined LPU — started exploring ML & Python" },
-              { year: "2024", text: "Built first ML projects, started freelancing" },
-              { year: "2025", text: "Top 10 at Model Masters Expo, 150+ LeetCode problems" },
-            ].map((item, i) => (
-              <div key={i} className="flex gap-3 items-start">
-                <span className="text-xs font-bold text-primary mt-0.5 w-14 shrink-0">{item.year}</span>
-                <span className="text-sm text-muted-foreground">{item.text}</span>
-              </div>
-            ))}
-          </div>
+          <p className="text-muted-foreground leading-relaxed text-sm md:text-base">
+            Hello! I'm <span className="text-foreground font-semibold">D. Anu Kumari</span> — a curious mind turned passionate developer, driven by the idea of transforming complex problems into intelligent, real-world solutions.
+          </p>
+          <p className="text-muted-foreground leading-relaxed text-sm md:text-base mt-3">
+            My journey into technology didn't start with expertise, but with a simple question: <span className="text-foreground italic">"How do things actually work?"</span> That curiosity evolved into a deep interest in building systems that are not just functional, but meaningful — at the intersection of machine learning, software development, and cloud technologies.
+          </p>
+          <p className="text-muted-foreground leading-relaxed text-sm md:text-base mt-3">
+            From detecting slow learners with ML to building real-time hand gesture recognition systems, each project has shaped my ability to think critically and solve problems that matter. My experience as an ML Engineer further bridged the gap between theory and practical implementation.
+          </p>
         </motion.div>
       </div>
 
