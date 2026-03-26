@@ -4,23 +4,37 @@ import SectionWrapper from "./SectionWrapper";
 import SectionTitle from "./SectionTitle";
 
 const contactInfo = [
-  { icon: Mail, label: "Email", value: "anu.kumari@email.com", href: "mailto:anu.kumari@email.com" },
-  { icon: Linkedin, label: "LinkedIn", value: "linkedin.com/in/anukumari", href: "#" },
-  { icon: Github, label: "GitHub", value: "github.com/anukumari", href: "#" },
-  { icon: Phone, label: "Phone", value: "+91 XXXXX XXXXX", href: "tel:+91" },
+  { icon: Mail, label: "Email", value: "kanusha5431@gmail.com", href: "mailto:kanusha5431@gmail.com" },
+  { icon: Linkedin, label: "LinkedIn", value: "linkedin.com/in/donipati-anu-kumari", href: "https://linkedin.com/in/donipati-anu-kumari" },
+  { icon: Github, label: "GitHub", value: "github.com/942004", href: "https://github.com/942004" },
+  { icon: Phone, label: "Phone", value: "+91 78478 98609", href: "tel:+917847898609" },
 ];
 
 const ContactSection = () => {
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 3000);
+    const form = e.currentTarget;
+    const data = new FormData(form);
+    const res = await fetch(`https://formspree.io/f/${import.meta.env.VITE_FORMSPREE_ID}`, {
+      method: "POST",
+      body: data,
+      headers: { Accept: "application/json" },
+    });
+    if (res.ok) {
+      setSubmitted(true);
+      form.reset();
+      setTimeout(() => setSubmitted(false), 4000);
+    }
   };
 
   return (
-    <SectionWrapper id="contact">
+    <SectionWrapper id="contact" className="relative overflow-hidden">
+      {/* Background blobs */}
+      <div className="absolute top-0 left-0 w-[45%] h-[70%] bg-primary/12 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-0 right-0 w-[45%] h-[70%] bg-accent/12 rounded-full blur-[100px] pointer-events-none" />
+      <div className="relative z-10">
       <SectionTitle title="Let's Connect" subtitle="Feel free to reach out" />
       <div className="grid md:grid-cols-2 gap-8">
         <div className="space-y-4">
@@ -28,7 +42,9 @@ const ContactSection = () => {
             <a
               key={i}
               href={c.href}
-              className="flex items-center gap-4 bg-card rounded-2xl p-5 card-hover border border-border group relative overflow-hidden"
+              target={c.href.startsWith("http") ? "_blank" : undefined}
+              rel={c.href.startsWith("http") ? "noopener noreferrer" : undefined}
+              className="flex items-center gap-4 glass-card rounded-2xl p-5 card-hover group relative overflow-hidden"
             >
               <div className="absolute top-0 left-0 w-1 h-full gradient-primary opacity-0 group-hover:opacity-100 transition-opacity" />
               <div className="w-12 h-12 rounded-xl gradient-primary flex items-center justify-center shrink-0">
@@ -41,7 +57,7 @@ const ContactSection = () => {
             </a>
           ))}
         </div>
-        <div className="bg-card rounded-2xl p-8 border border-border relative overflow-hidden">
+        <div className="glass-card rounded-2xl p-6 md:p-8 relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-1 gradient-primary" />
           {submitted ? (
             <div className="flex flex-col items-center justify-center h-full gap-4 py-12">
@@ -57,8 +73,9 @@ const ContactSection = () => {
                 <label className="text-sm font-semibold text-heading mb-2 block">Name</label>
                 <input
                   type="text"
+                  name="name"
                   required
-                  className="w-full px-4 py-3 rounded-xl border border-border bg-secondary text-foreground focus:outline-none focus:ring-2 focus:ring-ring transition-all"
+                  className="w-full px-4 py-3 rounded-xl border border-white/20 bg-white/5 backdrop-blur-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring transition-all placeholder:text-muted-foreground/50"
                   placeholder="Your name"
                 />
               </div>
@@ -66,8 +83,9 @@ const ContactSection = () => {
                 <label className="text-sm font-semibold text-heading mb-2 block">Email</label>
                 <input
                   type="email"
+                  name="email"
                   required
-                  className="w-full px-4 py-3 rounded-xl border border-border bg-secondary text-foreground focus:outline-none focus:ring-2 focus:ring-ring transition-all"
+                  className="w-full px-4 py-3 rounded-xl border border-white/20 bg-white/5 backdrop-blur-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring transition-all placeholder:text-muted-foreground/50"
                   placeholder="your@email.com"
                 />
               </div>
@@ -75,8 +93,9 @@ const ContactSection = () => {
                 <label className="text-sm font-semibold text-heading mb-2 block">Message</label>
                 <textarea
                   required
+                  name="message"
                   rows={4}
-                  className="w-full px-4 py-3 rounded-xl border border-border bg-secondary text-foreground focus:outline-none focus:ring-2 focus:ring-ring resize-none transition-all"
+                  className="w-full px-4 py-3 rounded-xl border border-white/20 bg-white/5 backdrop-blur-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring resize-none transition-all placeholder:text-muted-foreground/50"
                   placeholder="Your message..."
                 />
               </div>
@@ -89,6 +108,7 @@ const ContactSection = () => {
             </form>
           )}
         </div>
+      </div>
       </div>
     </SectionWrapper>
   );

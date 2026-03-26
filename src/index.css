@@ -6,47 +6,47 @@
 
 @layer base {
   :root {
-    --background: 260 15% 6%;
-    --foreground: 0 0% 90%;
+    --background: 215 42% 5%;
+    --foreground: 195 35% 88%;
 
-    --card: 260 12% 10%;
-    --card-foreground: 0 0% 90%;
+    --card: 215 42% 8%;
+    --card-foreground: 195 35% 88%;
 
-    --popover: 260 12% 10%;
-    --popover-foreground: 0 0% 90%;
+    --popover: 215 42% 8%;
+    --popover-foreground: 195 35% 88%;
 
-    --primary: 280 80% 60%;
+    --primary: 186 78% 52%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 260 10% 16%;
-    --secondary-foreground: 0 0% 80%;
+    --secondary: 215 32% 12%;
+    --secondary-foreground: 195 25% 78%;
 
-    --muted: 260 10% 14%;
-    --muted-foreground: 260 8% 55%;
+    --muted: 215 30% 12%;
+    --muted-foreground: 200 18% 58%;
 
-    --accent: 330 85% 60%;
+    --accent: 210 88% 65%;
     --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 100%;
+    --destructive: 0 72% 55%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 260 10% 18%;
-    --input: 260 10% 18%;
-    --ring: 280 80% 60%;
+    --border: 210 28% 18%;
+    --input: 215 30% 12%;
+    --ring: 186 78% 52%;
 
     --radius: 0.75rem;
 
-    --heading: 0 0% 95%;
-    --purple-glow: 280 80% 60%;
+    --heading: 195 42% 92%;
+    --cyan-glow: 186 78% 55%;
 
-    --sidebar-background: 260 12% 8%;
-    --sidebar-foreground: 0 0% 90%;
-    --sidebar-primary: 0 0% 95%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 260 10% 14%;
-    --sidebar-accent-foreground: 0 0% 90%;
-    --sidebar-border: 260 10% 18%;
-    --sidebar-ring: 280 80% 60%;
+    --sidebar-background: 215 42% 6%;
+    --sidebar-foreground: 195 35% 85%;
+    --sidebar-primary: 195 42% 88%;
+    --sidebar-primary-foreground: 215 42% 5%;
+    --sidebar-accent: 215 32% 12%;
+    --sidebar-accent-foreground: 195 35% 85%;
+    --sidebar-border: 210 28% 18%;
+    --sidebar-ring: 186 78% 52%;
 
     --font-heading: 'Space Grotesk', sans-serif;
     --font-body: 'Inter', sans-serif;
@@ -59,7 +59,16 @@
   }
 
   body {
-    @apply bg-background text-foreground font-body antialiased;
+    @apply text-foreground font-body antialiased;
+    /* vibrant mesh background for iOS-style frosted glass */
+    background-image: 
+      radial-gradient(at 0% 0%, hsla(186, 80%, 45%, 0.30) 0px, transparent 55%),
+      radial-gradient(at 100% 0%, hsla(210, 85%, 50%, 0.25) 0px, transparent 55%),
+      radial-gradient(at 100% 100%, hsla(175, 75%, 42%, 0.20) 0px, transparent 55%),
+      radial-gradient(at 0% 100%, hsla(200, 80%, 48%, 0.20) 0px, transparent 55%),
+      radial-gradient(at 50% 50%, hsla(190, 75%, 45%, 0.15) 0px, transparent 55%);
+    background-color: #070d16;
+    background-attachment: fixed;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -82,18 +91,18 @@
   }
 
   .gradient-primary {
-    background: linear-gradient(135deg, hsl(280 80% 60%), hsl(330 85% 60%));
+    background: linear-gradient(135deg, hsl(186 78% 50%), hsl(210 88% 62%));
   }
 
   .gradient-text {
-    background: linear-gradient(135deg, hsl(280 80% 65%), hsl(330 85% 65%));
+    background: linear-gradient(135deg, hsl(186 78% 62%), hsl(210 88% 72%));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
   .gradient-accent {
-    background: linear-gradient(135deg, hsl(330 85% 60%), hsl(350 80% 65%));
+    background: linear-gradient(135deg, hsl(210 88% 70%), hsl(186 78% 62%));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -108,17 +117,146 @@
   }
 
   .card-hover {
-    @apply transition-all duration-300;
+    will-change: transform;
+    transition:
+      transform 400ms cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 400ms cubic-bezier(0.16, 1, 0.3, 1),
+      border-color 300ms ease;
   }
 
   .card-hover:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 20px 40px hsl(var(--primary) / 0.1);
+    transform: translateY(-6px) scale(1.01);
+    box-shadow: 0 18px 38px rgba(0,150,180,0.22), 0 6px 18px rgba(0,120,160,0.14);
+    border-color: rgba(80,200,220,0.28);
+  }
+
+  .card-hover::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(135deg, rgba(124,58,237,0.0), rgba(236,72,153,0.0));
+    opacity: 0;
+    transition: opacity 250ms ease;
+    border-radius: inherit;
+  }
+
+  .card-hover:hover::after {
+    opacity: 0.02;
+  }
+
+  .card-hover:focus-visible {
+    transform: translateY(-6px) scale(1.01);
+    outline: none;
+    box-shadow: 0 6px 20px hsl(var(--primary) / 0.12), 0 0 0 4px hsl(var(--primary) / 0.06);
   }
 
   .section-padding {
-    @apply py-20 px-4 md:px-8 lg:px-16;
+    @apply py-20 px-6 md:px-12 lg:px-20;
   }
+}
+
+/* Skill badge hover */
+.skill-badge {
+  @apply transition-transform transition-colors duration-200 ease-in-out;
+}
+
+.skill-badge:hover {
+  transform: translateY(-4px) scale(1.03);
+  background: rgba(15,40,70,0.65);
+  border-color: rgba(80,190,210,0.35);
+  box-shadow: 0 8px 20px rgba(0,150,180,0.20);
+}
+
+/* Frosted pill badges (glass) */
+.frost-badge {
+  background: linear-gradient(145deg, rgba(15,40,75,0.68) 0%, rgba(8,22,45,0.50) 100%);
+  border: 1px solid rgba(80,190,210,0.22);
+  box-shadow: inset 0 1.5px 0 rgba(100,200,220,0.18), 0 2px 8px rgba(0,150,180,0.22);
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+}
+
+.frost-badge:hover {
+  transform: translateY(-4px) scale(1.02);
+  background: linear-gradient(145deg, rgba(18,48,88,0.78) 0%, rgba(10,28,55,0.60) 100%);
+  box-shadow: inset 0 1.5px 0 rgba(100,200,220,0.26), 0 6px 18px rgba(0,150,180,0.28);
+}
+
+/* Glassmorphism card style — polished dark glass */
+.glass-card {
+  background: linear-gradient(
+    145deg,
+    rgba(16, 38, 72, 0.58) 0%,
+    rgba(8, 20, 44, 0.40) 60%,
+    rgba(12, 28, 58, 0.52) 100%
+  );
+  -webkit-backdrop-filter: blur(28px) saturate(200%) brightness(1.05);
+  backdrop-filter: blur(28px) saturate(200%) brightness(1.05);
+  border: 1px solid rgba(100, 210, 230, 0.16);
+  box-shadow: 
+    0 8px 40px rgba(0, 140, 175, 0.20),
+    0 2px 10px rgba(0, 100, 140, 0.12),
+    inset 0 1.5px 0 rgba(120, 215, 235, 0.18),
+    inset 0 -1px 0 rgba(0, 80, 120, 0.10);
+  position: relative;
+  will-change: transform;
+  transition:
+    transform 450ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 450ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 300ms ease;
+}
+
+.glass-card:hover {
+  background: linear-gradient(
+    145deg,
+    rgba(20, 48, 90, 0.70) 0%,
+    rgba(10, 26, 56, 0.54) 60%,
+    rgba(15, 35, 70, 0.64) 100%
+  );
+  box-shadow: 
+    0 24px 64px rgba(0, 150, 185, 0.32),
+    0 8px 20px rgba(0, 120, 160, 0.18),
+    inset 0 1.5px 0 rgba(120, 215, 235, 0.28),
+    inset 0 -1px 0 rgba(0, 80, 120, 0.14);
+  border-color: rgba(90, 210, 230, 0.30);
+  transform: translateY(-8px) scale(1.015);
+}
+
+/* Top-left glare — simulates light hitting glass edge */
+.glass-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background: linear-gradient(
+    130deg,
+    rgba(140, 220, 240, 0.12) 0%,
+    rgba(100, 190, 215, 0.04) 30%,
+    transparent 55%
+  );
+  z-index: 0;
+  transition: opacity 300ms ease;
+}
+
+.glass-card:hover::before {
+  background: linear-gradient(
+    130deg,
+    rgba(140, 220, 240, 0.18) 0%,
+    rgba(100, 190, 215, 0.06) 30%,
+    transparent 55%
+  );
+}
+
+.glass-card img {
+  transition: transform 420ms cubic-bezier(.2,.9,.2,1), filter 420ms ease;
+  transform-origin: center;
+}
+
+.glass-card:hover img {
+  transform: scale(1.10) translateY(-6px);
+  filter: brightness(1.10) saturate(1.05);
 }
 
 /* Dashed circle animation */
@@ -138,6 +276,24 @@
 
 .animate-float-profile {
   animation: float-profile 4s ease-in-out infinite;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Marquee animations for skills */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@keyframes marquee-reverse {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
 }
 
 /* Scrollbar */

@@ -10,13 +10,14 @@ interface SectionWrapperProps {
 const SectionWrapper = ({ children, id, className = "" }: SectionWrapperProps) => (
   <motion.section
     id={id}
-    initial={{ opacity: 0, y: 40 }}
+    initial={{ opacity: 0, y: 30 }}
     whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true, margin: "-100px" }}
-    transition={{ duration: 0.6, ease: "easeOut" }}
+    viewport={{ once: true, margin: "-80px" }}
+    transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+    style={{ willChange: "transform, opacity" }}
     className={`section-padding ${className}`}
   >
-    <div className="max-w-6xl mx-auto">{children}</div>
+    <div className="max-w-screen-2xl mx-auto">{children}</div>
   </motion.section>
 );
 

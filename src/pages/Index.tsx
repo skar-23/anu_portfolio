@@ -10,23 +10,28 @@ import AchievementsSection from "@/components/AchievementsSection";
 import ResumeSection from "@/components/ResumeSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
+import ParticleBackground from "@/components/ParticleBackground";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background">
-      <Navbar />
-      <HeroSection />
-      <EducationSection />
-      <SkillsSection />
-      <FreelancingSection />
-      <ProjectsSection />
-      <CodingPlatformsSection />
-      <CertificatesSection />
-      <AchievementsSection />
-      <ResumeSection />
-      <ContactSection />
-      <Footer />
-    </div>
+    <>
+      {/* Fixed ML neural-network background — visible through all glass cards */}
+      <ParticleBackground />
+      <div className="relative z-10 min-h-screen">
+        <Navbar />
+        <HeroSection />
+        <EducationSection />
+        <SkillsSection />
+        <FreelancingSection />
+        <ProjectsSection />
+        <CodingPlatformsSection />
+        <CertificatesSection />
+        <AchievementsSection />
+        <ResumeSection />
+        <ContactSection />
+        <Footer />
+      </div>
+    </>
   );
 };
 
