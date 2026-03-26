@@ -33,9 +33,9 @@ const EducationSection = () => (
     <div className="relative z-10">
       <SectionTitle title="Education" subtitle="My academic journey" />
       {/* Asymmetric grid — current card larger */}
-      <div className="grid grid-cols-1 md:grid-cols-5 gap-6 items-start">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
         {educationData.map((ed, i) => (
-          <div key={i} className={i === 0 ? "md:col-span-3" : "md:col-span-2"}>
+          <div key={i}>
             <EducationCard index={i} image={ed.image} school={ed.school} degree={ed.degree} score={ed.score} period={ed.period} location={ed.location} link={ed.link} />
           </div>
         ))}
