@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Sparkles, MapPin, Coffee, Music, BookOpen, Gamepad2, Camera } from "lucide-react";
+import { Sparkles, MapPin, Music, BookOpen, Gamepad2, Camera } from "lucide-react";
 import SectionWrapper from "./SectionWrapper";
 import SectionTitle from "./SectionTitle";
 
@@ -15,7 +15,6 @@ const facts = [
 const offCoding = [
   { icon: Music, label: "Listening to music" },
   { icon: BookOpen, label: "Reading tech blogs" },
-  { icon: Coffee, label: "Chai & deep thinking" },
   { icon: Camera, label: "Photography" },
   { icon: Gamepad2, label: "Gaming" },
 ];
