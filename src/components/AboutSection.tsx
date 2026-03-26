@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Sparkles, MapPin, Music, BookOpen, Gamepad2, Camera } from "lucide-react";
+import { Sparkles, Music, BookOpen, Gamepad2, Camera } from "lucide-react";
 import SectionWrapper from "./SectionWrapper";
 import SectionTitle from "./SectionTitle";
 
@@ -42,8 +42,8 @@ const AboutSection = () => (
       <SectionTitle title="About Me" subtitle="A little about who I am" />
 
       <div className="grid md:grid-cols-2 gap-6 mb-6">
-        {/* About Me */}
-        <motion.div {...fadeUp(0)} className="glass-card rounded-2xl p-6 md:p-8">
+        {/* Who I Am */}
+        <motion.div {...fadeUp(0)} className="glass-card rounded-2xl p-6 md:p-8 md:col-span-2">
           <div className="flex items-center gap-2 mb-4">
             <Sparkles size={18} className="text-primary" />
             <h3 className="font-heading font-bold text-lg text-heading">Who I Am</h3>
@@ -52,24 +52,10 @@ const AboutSection = () => (
             I'm <span className="text-foreground font-semibold">Donipati Anu Kumari</span>, a passionate Machine Learning Engineer and B.Tech CSE student at Lovely Professional University. I love turning raw data into intelligent systems that solve real problems.
           </p>
           <p className="text-muted-foreground leading-relaxed text-sm md:text-base mt-3">
+            My journey into technology didn't start with expertise, but with a simple question: <span className="text-foreground italic">"How do things actually work?"</span> That curiosity quickly evolved into a deep interest in building systems that are not just functional, but meaningful. Today, I specialize in crafting solutions at the intersection of machine learning, software development, and cloud technologies.
+          </p>
+          <p className="text-muted-foreground leading-relaxed text-sm md:text-base mt-3">
             From building ML models to competing in national-level competitions, I'm constantly pushing my boundaries and exploring the cutting edge of AI.
-          </p>
-        </motion.div>
-
-        {/* My Journey */}
-        <motion.div {...fadeUp(0.1)} className="glass-card rounded-2xl p-6 md:p-8">
-          <div className="flex items-center gap-2 mb-4">
-            <MapPin size={18} className="text-primary" />
-            <h3 className="font-heading font-bold text-lg text-heading">My Journey</h3>
-          </div>
-          <p className="text-muted-foreground leading-relaxed text-sm md:text-base">
-            Hello! I'm <span className="text-foreground font-semibold">D. Anu Kumari</span> — a curious mind turned passionate developer, driven by the idea of transforming complex problems into intelligent, real-world solutions.
-          </p>
-          <p className="text-muted-foreground leading-relaxed text-sm md:text-base mt-3">
-            My journey into technology didn't start with expertise, but with a simple question: <span className="text-foreground italic">"How do things actually work?"</span> That curiosity evolved into a deep interest in building systems that are not just functional, but meaningful — at the intersection of machine learning, software development, and cloud technologies.
-          </p>
-          <p className="text-muted-foreground leading-relaxed text-sm md:text-base mt-3">
-            From detecting slow learners with ML to building real-time hand gesture recognition systems, each project has shaped my ability to think critically and solve problems that matter. My experience as an ML Engineer further bridged the gap between theory and practical implementation.
           </p>
         </motion.div>
       </div>
