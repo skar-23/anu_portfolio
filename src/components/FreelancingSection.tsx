@@ -8,7 +8,7 @@ const FreelancingSection = () => (
     <div className="absolute bottom-0 right-0 w-[50%] h-[50%] bg-primary/12 rounded-full blur-[100px] pointer-events-none" />
 
     <div className="relative z-10">
-      <SectionTitle title="Freelance" subtitle="Professional work and freelancing" />
+      <SectionTitle title="Freelancing" subtitle="Professional work and freelancing" />
       <div className="max-w-3xl mx-auto">
         <div className="glass-card rounded-[2rem] p-6 md:p-10 group relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
