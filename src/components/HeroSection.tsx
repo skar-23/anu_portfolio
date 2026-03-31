@@ -35,7 +35,7 @@ const HeroSection = () => (
             </div>
             <div className="glass-card rounded-2xl p-4 relative z-10">
               <div className="rounded-xl overflow-hidden mb-4">
-                <img src={profilePhoto} alt="Donipati Anu Kumari" className="w-full h-96 sm:h-[28rem] object-cover object-top" />
+                <img src={profilePhoto} alt="Donipati Anu Kumari" className="w-full h-80 sm:h-96 object-cover object-top" />
               </div>
               <h3 className="font-heading font-bold text-lg sm:text-xl text-heading px-1">Donipati Anu Kumari</h3>
               <div className="flex items-center gap-2 px-1 mt-1">
