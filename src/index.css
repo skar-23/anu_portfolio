@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Dancing+Script:wght@700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -9,7 +9,8 @@
     font-size: 18px;
   }
 
-  :root {
+  /* ── Dark theme (default / teal) ── */
+  :root, .dark {
     --background: 215 42% 5%;
     --foreground: 195 35% 88%;
 
@@ -39,9 +40,7 @@
     --ring: 186 78% 52%;
 
     --radius: 0.75rem;
-
     --heading: 195 42% 92%;
-    --cyan-glow: 186 78% 55%;
 
     --sidebar-background: 215 42% 6%;
     --sidebar-foreground: 195 35% 85%;
@@ -55,6 +54,48 @@
     --font-heading: 'Space Grotesk', sans-serif;
     --font-body: 'Inter', sans-serif;
   }
+
+  /* ── Light theme (exact pink/mauve palette from reference) ── */
+  .light {
+    --background: 345 50% 97%;
+    --foreground: 340 45% 18%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 340 45% 18%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 340 45% 18%;
+
+    --primary: 338 48% 40%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 340 30% 90%;
+    --secondary-foreground: 338 48% 35%;
+
+    --muted: 340 25% 93%;
+    --muted-foreground: 338 25% 45%;
+
+    --accent: 338 48% 40%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 72% 55%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 338 30% 82%;
+    --input: 340 25% 93%;
+    --ring: 338 48% 40%;
+
+    --heading: 338 50% 22%;
+
+    --sidebar-background: 345 40% 95%;
+    --sidebar-foreground: 340 45% 18%;
+    --sidebar-primary: 338 48% 40%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 340 30% 90%;
+    --sidebar-accent-foreground: 340 45% 18%;
+    --sidebar-border: 338 30% 82%;
+    --sidebar-ring: 338 48% 40%;
+  }
 }
 
 @layer base {
@@ -64,7 +105,11 @@
 
   body {
     @apply text-foreground font-body antialiased;
-    /* vibrant mesh background for iOS-style frosted glass */
+    background-color: hsl(var(--background));
+    background-attachment: fixed;
+  }
+
+  .dark body, :root body {
     background-image: 
       radial-gradient(at 0% 0%, hsla(186, 80%, 45%, 0.30) 0px, transparent 55%),
       radial-gradient(at 100% 0%, hsla(210, 85%, 50%, 0.25) 0px, transparent 55%),
@@ -72,7 +117,18 @@
       radial-gradient(at 0% 100%, hsla(200, 80%, 48%, 0.20) 0px, transparent 55%),
       radial-gradient(at 50% 50%, hsla(190, 75%, 45%, 0.15) 0px, transparent 55%);
     background-color: #070d16;
-    background-attachment: fixed;
+  }
+
+  .light body {
+    background-image:
+      radial-gradient(at 0% 0%, hsla(338, 50%, 88%, 0.35) 0px, transparent 55%),
+      radial-gradient(at 100% 0%, hsla(345, 45%, 90%, 0.25) 0px, transparent 55%),
+      radial-gradient(at 50% 100%, hsla(330, 40%, 92%, 0.20) 0px, transparent 55%);
+    background-color: hsl(345 50% 97%);
+  }
+
+  .light {
+    --cert-card-bg: rgba(255, 255, 255, 0.85);
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -95,18 +151,18 @@
   }
 
   .gradient-primary {
-    background: linear-gradient(135deg, hsl(186 78% 50%), hsl(210 88% 62%));
+    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
   }
 
   .gradient-text {
-    background: linear-gradient(135deg, hsl(186 78% 62%), hsl(210 88% 72%));
+    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
   .gradient-accent {
-    background: linear-gradient(135deg, hsl(210 88% 70%), hsl(186 78% 62%));
+    background: linear-gradient(135deg, hsl(var(--accent)), hsl(var(--primary)));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -172,6 +228,12 @@
   box-shadow: 0 8px 20px rgba(0,150,180,0.20);
 }
 
+.light .skill-badge:hover {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: rgba(155, 58, 90, 0.35);
+  box-shadow: 0 8px 20px rgba(155, 58, 90, 0.15);
+}
+
 /* Frosted pill badges (glass) */
 .frost-badge {
   background: linear-gradient(145deg, rgba(15,40,75,0.68) 0%, rgba(8,22,45,0.50) 100%);
@@ -185,6 +247,19 @@
   transform: translateY(-4px) scale(1.02);
   background: linear-gradient(145deg, rgba(18,48,88,0.78) 0%, rgba(10,28,55,0.60) 100%);
   box-shadow: inset 0 1.5px 0 rgba(100,200,220,0.26), 0 6px 18px rgba(0,150,180,0.28);
+}
+
+.light .frost-badge {
+  background: rgba(255, 255, 255, 0.80);
+  border: 1px solid rgba(155, 58, 90, 0.20);
+  box-shadow: 0 2px 8px rgba(155, 58, 90, 0.10);
+  color: hsl(338 48% 35%);
+}
+
+.light .frost-badge:hover {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: rgba(155, 58, 90, 0.35);
+  box-shadow: 0 6px 16px rgba(155, 58, 90, 0.15);
 }
 
 /* Glassmorphism card style — polished dark glass */
@@ -225,6 +300,25 @@
     inset 0 -1px 0 rgba(0, 80, 120, 0.14);
   border-color: rgba(90, 210, 230, 0.30);
   transform: translateY(-8px) scale(1.015);
+}
+
+/* Light mode glass card */
+.light .glass-card {
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(155, 58, 90, 0.15);
+  box-shadow:
+    0 8px 32px rgba(155, 58, 90, 0.10),
+    0 2px 8px rgba(155, 58, 90, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.light .glass-card:hover {
+  background: rgba(255, 255, 255, 0.90);
+  border-color: rgba(155, 58, 90, 0.28);
+  box-shadow:
+    0 16px 48px rgba(155, 58, 90, 0.16),
+    0 4px 16px rgba(155, 58, 90, 0.10);
+  transform: translateY(-6px) scale(1.012);
 }
 
 /* Top-left glare — simulates light hitting glass edge */

@@ -29,14 +29,14 @@ const AchievementsSection = () => (
             className={`group relative rounded-2xl px-6 py-5 flex items-center gap-6 bg-gradient-to-br border backdrop-blur-sm transition-all duration-300 hover:translate-x-2 hover:shadow-2xl ${s.color}`}
             style={{ boxShadow: "0 4px 24px rgba(0,140,175,0.10)" }}
           >
-            <div className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300">
-              <s.icon size={22} />
+            <div className="w-12 h-12 rounded-2xl bg-foreground/10 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300">
+              <s.icon size={22} className="text-foreground/70" />
             </div>
             <div className="flex-1 min-w-0">
-              <p className="font-semibold text-sm md:text-base text-white/80">{s.label}</p>
-              <p className="text-xs text-white/45">{s.desc}</p>
+              <p className="font-semibold text-sm md:text-base text-foreground/90">{s.label}</p>
+              <p className="text-xs text-muted-foreground">{s.desc}</p>
             </div>
-            <div className="font-heading font-bold text-3xl md:text-4xl text-white leading-none shrink-0">
+            <div className="font-heading font-bold text-3xl md:text-4xl text-foreground leading-none shrink-0">
               {s.value}
             </div>
           </motion.div>

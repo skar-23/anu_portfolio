@@ -66,8 +66,8 @@ const AboutSection = () => (
           <h3 className="font-heading font-bold text-lg text-heading mb-4">⚡ Quick Facts</h3>
           <div className="grid grid-cols-1 gap-2">
             {facts.map((f, i) => (
-              <div key={i} className="flex items-center gap-3 text-sm text-muted-foreground">
-                <span className="text-base">{f.emoji}</span>
+              <div key={i} className="flex items-center gap-3 text-base text-muted-foreground">
+                <span className="text-lg">{f.emoji}</span>
                 <span>{f.text}</span>
               </div>
             ))}
@@ -77,10 +77,10 @@ const AboutSection = () => (
         {/* Off Coding */}
         <motion.div {...fadeUp(0.3)} className="glass-card rounded-2xl p-6 md:p-8">
           <h3 className="font-heading font-bold text-lg text-heading mb-4">🎮 When I'm Not Coding</h3>
-          <p className="text-sm text-muted-foreground mb-5">Life beyond the terminal — things that keep me balanced and inspired.</p>
+          <p className="text-base text-muted-foreground mb-5">Life beyond the terminal — things that keep me balanced and inspired.</p>
           <div className="flex flex-wrap gap-3">
             {offCoding.map((item, i) => (
-              <div key={i} className="flex items-center gap-2 px-4 py-2 rounded-full frost-badge text-sm text-foreground">
+              <div key={i} className="flex items-center gap-2 px-4 py-2 rounded-full frost-badge text-base text-foreground">
                 <item.icon size={15} className="text-primary" />
                 {item.label}
               </div>
@@ -92,15 +92,15 @@ const AboutSection = () => (
       {/* My Approach */}
       <motion.div {...fadeUp(0.4)} className="glass-card rounded-2xl p-6 md:p-8 mt-6">
         <h3 className="font-heading font-bold text-lg text-heading mb-2">🧭 My Approach</h3>
-        <p className="text-sm text-muted-foreground mb-6 max-w-2xl">
+        <p className="text-base text-muted-foreground mb-6 max-w-2xl">
           I believe technology should not only work efficiently but also create real value for users. For me, development is not just about coding — it's about creating meaningful experiences that combine logic, creativity, and usability.
         </p>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {values.map((v, i) => (
-            <div key={i} className="flex flex-col gap-1 p-4 rounded-xl bg-white/5 border border-white/10">
-              <span className="text-xl mb-1">{v.emoji}</span>
-              <span className="font-semibold text-sm text-foreground">{v.label}</span>
-              <span className="text-xs text-muted-foreground">{v.desc}</span>
+            <div key={i} className="flex flex-col gap-1 p-4 rounded-xl bg-foreground/5 border border-border hover:border-primary/40 hover:bg-primary/5 transition-all duration-200">
+              <span className="text-2xl mb-1">{v.emoji}</span>
+              <span className="font-semibold text-base text-foreground">{v.label}</span>
+              <span className="text-sm text-muted-foreground">{v.desc}</span>
             </div>
           ))}
         </div>

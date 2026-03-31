@@ -75,7 +75,7 @@ const ContactSection = () => {
                   type="text"
                   name="name"
                   required
-                  className="w-full px-4 py-3 rounded-xl border border-white/20 bg-white/5 backdrop-blur-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring transition-all placeholder:text-muted-foreground/50"
+                  className="w-full px-4 py-3 rounded-xl border border-border bg-background/60 backdrop-blur-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring transition-all placeholder:text-muted-foreground/50"
                   placeholder="Your name"
                 />
               </div>
@@ -85,7 +85,7 @@ const ContactSection = () => {
                   type="email"
                   name="email"
                   required
-                  className="w-full px-4 py-3 rounded-xl border border-white/20 bg-white/5 backdrop-blur-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring transition-all placeholder:text-muted-foreground/50"
+                  className="w-full px-4 py-3 rounded-xl border border-border bg-background/60 backdrop-blur-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring transition-all placeholder:text-muted-foreground/50"
                   placeholder="your@email.com"
                 />
               </div>
@@ -95,7 +95,7 @@ const ContactSection = () => {
                   required
                   name="message"
                   rows={4}
-                  className="w-full px-4 py-3 rounded-xl border border-white/20 bg-white/5 backdrop-blur-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring resize-none transition-all placeholder:text-muted-foreground/50"
+                  className="w-full px-4 py-3 rounded-xl border border-border bg-background/60 backdrop-blur-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring resize-none transition-all placeholder:text-muted-foreground/50"
                   placeholder="Your message..."
                 />
               </div>

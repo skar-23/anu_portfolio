@@ -66,7 +66,7 @@ const ProjectsSection = () => (
               <h3 className="font-heading font-bold text-xl md:text-2xl text-heading mb-3 group-hover:text-primary transition-colors duration-300">{p.title}</h3>
               <p className="text-muted-foreground/80 text-sm md:text-base mb-6 md:mb-8 leading-relaxed flex-1">{p.desc}</p>
               <div className="flex flex-wrap gap-3">
-                <a href={p.github || "#"} target={p.github ? "_blank" : undefined} rel={p.github ? "noopener noreferrer" : undefined} className="inline-flex items-center gap-2 px-5 py-3 text-sm font-bold rounded-2xl bg-white/5 border border-white/10 text-foreground hover:bg-white/10 transition-all active:scale-95">
+                <a href={p.github || "#"} target={p.github ? "_blank" : undefined} rel={p.github ? "noopener noreferrer" : undefined} className="inline-flex items-center gap-2 px-5 py-3 text-sm font-bold rounded-2xl border border-border text-foreground hover:border-primary hover:text-primary hover:bg-primary/10 transition-all duration-200 active:scale-95">
                   <Github size={16} /> GitHub
                 </a>
               </div>

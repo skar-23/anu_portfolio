@@ -12,11 +12,11 @@ import ResumeSection from "@/components/ResumeSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import ParticleBackground from "@/components/ParticleBackground";
+import { ThemeProvider } from "@/components/ThemeProvider";
 
 const Index = () => {
   return (
-    <>
-      {/* Fixed ML neural-network background — visible through all glass cards */}
+    <ThemeProvider>
       <ParticleBackground />
       <div className="relative z-10 min-h-screen">
         <Navbar />
@@ -33,7 +33,7 @@ const Index = () => {
         <ContactSection />
         <Footer />
       </div>
-    </>
+    </ThemeProvider>
   );
 };
 

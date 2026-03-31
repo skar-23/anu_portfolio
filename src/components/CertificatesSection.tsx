@@ -22,12 +22,12 @@ const CertificatesSection = () => (
         {certificates.map((c, i) => (
           <div
             key={i}
-            className="sticky group overflow-hidden rounded-[2rem] relative"
+            className="sticky group overflow-hidden rounded-[2rem] relative light:bg-white/80 light:border-border"
             style={{
               top: `calc(25vh + ${i * 20}px)`,
               zIndex: i + 1,
               marginBottom: "1rem",
-              background: "linear-gradient(135deg, rgba(16,38,72,0.80) 0%, rgba(8,20,44,0.70) 100%)",
+              background: "var(--cert-card-bg, linear-gradient(135deg, rgba(16,38,72,0.80) 0%, rgba(8,20,44,0.70) 100%))",
               backdropFilter: "blur(28px)",
               WebkitBackdropFilter: "blur(28px)",
               border: "1px solid rgba(100,210,230,0.16)",
@@ -50,8 +50,8 @@ const CertificatesSection = () => (
               }}
             />
             <div className="flex flex-col">
-              <div className="w-full h-56 sm:h-64 overflow-hidden">
-                <img src={c.image} alt={c.title} className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700 brightness-75" />
+              <div className="w-full h-56 sm:h-64 overflow-hidden [.light_&]:ring-1 [.light_&]:ring-border/60 [.light_&]:rounded-t-[2rem]">
+                <img src={c.image} alt={c.title} className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700 dark:brightness-75" />
               </div>
               <div className="flex-1 p-5 sm:p-7 flex flex-col justify-between">
                 <div>
