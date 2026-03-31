@@ -1,119 +1,129 @@
 import { motion } from "framer-motion";
-import { Mail, FileText, Flame } from "lucide-react";
+import { Download, FolderOpen } from "lucide-react";
+import { useEffect, useState } from "react";
 import profilePhoto from "@/assets/profile-photo.png";
 
-const stats = [
-  { value: "4+", label: "PROJECTS" },
-  { value: "15+", label: "REPOSITORIES" },
-  { value: "100+", label: "PROBLEMS SOLVED" },
-];
+const TYPED_STRINGS = ["Machine Learning Engineer", "AI Enthusiast", "Problem Solver"];
 
-const HeroSection = () => (
-  <section id="home" className="relative min-h-screen flex items-center overflow-hidden pt-16">
-    <div className="relative z-10 max-w-screen-2xl mx-auto w-full px-6 md:px-12 py-8 md:py-12">
-      <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
-        {/* Left - Photo Card */}
-        <motion.div
-          initial={{ x: -60, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          transition={{ duration: 0.7 }}
-          className="flex justify-center md:justify-center order-2 md:order-1"
-        >
-          <div className="relative w-full max-w-[280px] sm:max-w-xs">
-            {/* Dashed circle decoration */}
-            <div className="absolute -top-8 -left-8 w-[calc(100%+4rem)] h-[calc(100%+4rem)] pointer-events-none">
-              <svg viewBox="0 0 400 400" className="w-full h-full animate-rotate-slow">
-                <circle
-                  cx="200" cy="200" r="180"
-                  fill="none"
-                  stroke="hsl(186 78% 42%)"
-                  strokeWidth="3"
-                  strokeDasharray="15 12"
-                  opacity="0.6"
-                />
-              </svg>
-            </div>
-            <div className="glass-card rounded-2xl p-4 relative z-10">
-              <div className="rounded-xl overflow-hidden mb-4">
-                <img src={profilePhoto} alt="Donipati Anu Kumari" className="w-full h-80 sm:h-96 object-cover object-top" />
-              </div>
-              <h3 className="font-heading font-bold text-lg sm:text-xl text-heading px-1">Donipati Anu Kumari</h3>
-              <div className="flex items-center gap-2 px-1 mt-1">
-                <Flame size={16} className="text-primary" />
-                <span className="text-sm text-muted-foreground">ML Enthusiast</span>
-              </div>
-            </div>
-          </div>
-        </motion.div>
+const HeroSection = () => {
+  const [displayed, setDisplayed] = useState("");
+  const [strIdx, setStrIdx] = useState(0);
+  const [charIdx, setCharIdx] = useState(0);
+  const [deleting, setDeleting] = useState(false);
 
-        {/* Right - Text Content */}
-        <div className="order-1 md:order-2">
+  useEffect(() => {
+    const current = TYPED_STRINGS[strIdx];
+    const timeout = setTimeout(() => {
+      if (!deleting) {
+        setDisplayed(current.slice(0, charIdx + 1));
+        if (charIdx + 1 === current.length) {
+          setTimeout(() => setDeleting(true), 1400);
+        } else {
+          setCharIdx(charIdx + 1);
+        }
+      } else {
+        setDisplayed(current.slice(0, charIdx - 1));
+        if (charIdx - 1 === 0) {
+          setDeleting(false);
+          setStrIdx((strIdx + 1) % TYPED_STRINGS.length);
+          setCharIdx(0);
+        } else {
+          setCharIdx(charIdx - 1);
+        }
+      }
+    }, deleting ? 45 : 80);
+    return () => clearTimeout(timeout);
+  }, [charIdx, deleting, strIdx]);
+
+  return (
+    <section id="home" className="relative min-h-screen flex items-center overflow-hidden pt-16">
+      <div className="relative z-10 max-w-screen-xl mx-auto w-full px-6 md:px-16 py-12">
+        <div className="grid md:grid-cols-2 gap-12 items-center">
+
+          {/* Left — Text */}
           <motion.div
-            initial={{ y: 30, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.2, duration: 0.6 }}
+            initial={{ x: -50, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 0.7 }}
           >
-            <h1 className="text-4xl sm:text-5xl md:text-7xl font-heading font-bold leading-tight mb-2">
-              MACHINE
-              <br />
-              <span className="text-muted-foreground">LEARNING</span>
+            {/* Badge */}
+            <span className="inline-block border border-primary/50 text-primary text-xs font-semibold tracking-widest px-4 py-1.5 rounded-full mb-6">
+              HELLO, I AM
+            </span>
+
+            {/* Name */}
+            <h1 className="text-5xl sm:text-6xl md:text-7xl font-heading font-bold leading-tight mb-4 text-foreground">
+              Donipati<br />
+              <span className="gradient-text">Anu Kumari</span>
             </h1>
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-heading font-bold text-muted-foreground mb-5 md:mb-6">
-              ENGINEER
-            </h2>
-          </motion.div>
 
-          <motion.p
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.4, duration: 0.6 }}
-            className="text-muted-foreground text-sm sm:text-base md:text-lg mb-6 md:mb-8 max-w-md leading-relaxed"
-          >
-            Passionate about building intelligent solutions using Machine Learning and AI. Specialize in transforming data into impactful, real-world applications.
-          </motion.p>
+            {/* Typewriter */}
+            <p className="text-lg sm:text-xl text-muted-foreground font-medium mb-8 h-8">
+              {displayed}<span className="animate-pulse text-primary">|</span>
+            </p>
 
-          <motion.div
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.5, duration: 0.6 }}
-            className="flex flex-wrap gap-3 md:gap-4 mb-8 md:mb-12"
-          >
-            <a
-              href="#contact"
-              className="inline-flex items-center justify-center gap-2 px-6 md:px-8 py-3 rounded-full gradient-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity text-sm md:text-base"
-            >
-              <Mail size={16} /> Get In Touch
-            </a>
-            <a
-              href="/resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 px-6 md:px-8 py-3 rounded-full border-2 border-border text-foreground font-semibold hover:border-primary hover:text-primary transition-colors text-sm md:text-base"
-            >
-              <FileText size={16} /> View Resume
-            </a>
-          </motion.div>
+            {/* Buttons */}
+            <div className="flex flex-wrap gap-4 mb-10">
+              <a
+                href="/resume.pdf"
+                download
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full border-2 border-primary/60 text-foreground font-semibold hover:border-primary hover:text-primary transition-colors text-sm"
+              >
+                <Download size={15} /> Download CV
+              </a>
+              <a
+                href="#projects"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full gradient-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity text-sm"
+              >
+                <FolderOpen size={15} /> View Projects
+              </a>
+            </div>
 
-          {/* Stats */}
-          <motion.div
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.6, duration: 0.6 }}
-            className="flex gap-6 md:gap-12"
-          >
-            {stats.map((s, i) => (
-              <div key={i} className="text-center">
-                <div className="text-2xl sm:text-3xl md:text-4xl font-heading font-bold text-heading">
-                  {s.value.replace('+', '')}<span className="gradient-accent">+</span>
+            {/* Stats */}
+            <div className="flex gap-8">
+              {[["4+", "Projects"], ["15+", "Repositories"], ["100+", "Problems Solved"]].map(([val, label]) => (
+                <div key={label}>
+                  <div className="text-2xl md:text-3xl font-heading font-bold text-foreground">
+                    {val.replace("+", "")}<span className="gradient-accent">+</span>
+                  </div>
+                  <p className="text-xs text-muted-foreground tracking-wider mt-0.5">{label}</p>
                 </div>
-                <p className="text-[10px] sm:text-xs md:text-sm text-muted-foreground tracking-wider mt-1">{s.label}</p>
-              </div>
-            ))}
+              ))}
+            </div>
           </motion.div>
+
+          {/* Right — Arch Photo */}
+          <motion.div
+            initial={{ x: 60, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 0.7 }}
+            className="flex justify-center"
+          >
+            <div className="relative">
+              {/* Glow behind arch */}
+              <div className="absolute inset-0 rounded-[50%_50%_10px_10px/60%_60%_10px_10px] blur-2xl opacity-30 bg-primary scale-95" />
+              {/* Arch frame */}
+              <div
+                className="relative overflow-hidden border-2 border-primary/30"
+                style={{
+                  width: "280px",
+                  height: "360px",
+                  borderRadius: "50% 50% 12px 12px / 40% 40% 12px 12px",
+                }}
+              >
+                <img
+                  src={profilePhoto}
+                  alt="Donipati Anu Kumari"
+                  className="w-full h-full object-cover object-top"
+                />
+              </div>
+            </div>
+          </motion.div>
+
         </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 export default HeroSection;
