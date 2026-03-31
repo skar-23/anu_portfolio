@@ -1,26 +1,5 @@
 import { useEffect, useRef } from "react";
 
-interface Node {
-  x: number;
-  y: number;
-  vx: number;
-  vy: number;
-  size: number;
-  colorIdx: number;
-  phase: number;
-  phaseSpeed: number;
-}
-
-// Cyber Frost — teal / electric-blue / mint palette
-const NODE_COLORS = [
-  "26, 188, 195",   // primary teal
-  "38, 132, 220",   // electric blue
-  "28, 185, 170",   // mint-teal
-];
-
-const NODE_COUNT = 62;
-const MAX_DIST = 155;
-
 const ParticleBackground = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -31,7 +10,7 @@ const ParticleBackground = () => {
     if (!ctx) return;
 
     let animId: number;
-    const nodes: Node[] = [];
+    let t = 0;
 
     const resize = () => {
       canvas.width = window.innerWidth;
@@ -40,62 +19,81 @@ const ParticleBackground = () => {
     resize();
     window.addEventListener("resize", resize);
 
-    for (let i = 0; i < NODE_COUNT; i++) {
-      nodes.push({
-        x: Math.random() * window.innerWidth,
-        y: Math.random() * window.innerHeight,
-        vx: (Math.random() - 0.5) * 0.45,
-        vy: (Math.random() - 0.5) * 0.45,
-        size: Math.random() * 2.5 + 1.2,
-        colorIdx: Math.floor(Math.random() * NODE_COLORS.length),
-        phase: Math.random() * Math.PI * 2,
-        phaseSpeed: 0.012 + Math.random() * 0.018,
+    // Floating orbs
+    const orbs = Array.from({ length: 5 }, (_, i) => ({
+      x: Math.random() * window.innerWidth,
+      y: Math.random() * window.innerHeight,
+      r: 180 + Math.random() * 160,
+      vx: (Math.random() - 0.5) * 0.3,
+      vy: (Math.random() - 0.5) * 0.3,
+      hue: [186, 210, 170, 195, 220][i],
+    }));
+
+    // Hexagonal grid points
+    const HEX_SIZE = 60;
+    const getHexPoints = (cx: number, cy: number, s: number) =>
+      Array.from({ length: 6 }, (_, i) => {
+        const a = (Math.PI / 3) * i - Math.PI / 6;
+        return [cx + s * Math.cos(a), cy + s * Math.sin(a)] as [number, number];
       });
-    }
 
     const draw = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+      t += 0.004;
 
-      // — Synaptic connections (lines between nearby nodes) —
-      ctx.lineWidth = 0.75;
-      for (let i = 0; i < nodes.length; i++) {
-        for (let j = i + 1; j < nodes.length; j++) {
-          const dx = nodes[i].x - nodes[j].x;
-          const dy = nodes[i].y - nodes[j].y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < MAX_DIST) {
-            const alpha = (1 - dist / MAX_DIST) * 0.40;
-            ctx.strokeStyle = `rgba(26, 180, 190, ${alpha})`;
+      // Draw aurora orbs
+      orbs.forEach((o) => {
+        o.x += o.vx;
+        o.y += o.vy;
+        if (o.x < -o.r) o.x = canvas.width + o.r;
+        if (o.x > canvas.width + o.r) o.x = -o.r;
+        if (o.y < -o.r) o.y = canvas.height + o.r;
+        if (o.y > canvas.height + o.r) o.y = -o.r;
+
+        const grad = ctx.createRadialGradient(o.x, o.y, 0, o.x, o.y, o.r);
+        grad.addColorStop(0, `hsla(${o.hue}, 75%, 55%, 0.13)`);
+        grad.addColorStop(1, `hsla(${o.hue}, 75%, 55%, 0)`);
+        ctx.beginPath();
+        ctx.arc(o.x, o.y, o.r, 0, Math.PI * 2);
+        ctx.fillStyle = grad;
+        ctx.fill();
+      });
+
+      // Draw drifting hex grid
+      const cols = Math.ceil(canvas.width / (HEX_SIZE * 1.75)) + 2;
+      const rows = Math.ceil(canvas.height / (HEX_SIZE * 1.5)) + 2;
+      const offsetX = ((t * 12) % (HEX_SIZE * 1.75));
+      const offsetY = ((t * 8) % (HEX_SIZE * 1.5));
+
+      ctx.lineWidth = 0.5;
+
+      for (let row = -1; row < rows; row++) {
+        for (let col = -1; col < cols; col++) {
+          const cx = col * HEX_SIZE * 1.75 - offsetX + (row % 2 === 0 ? 0 : HEX_SIZE * 0.875);
+          const cy = row * HEX_SIZE * 1.5 - offsetY;
+
+          // Pulse opacity based on position + time
+          const pulse = 0.5 + 0.5 * Math.sin(t * 2 + col * 0.5 + row * 0.7);
+          const alpha = 0.04 + pulse * 0.06;
+
+          ctx.strokeStyle = `rgba(26, 188, 195, ${alpha})`;
+          const pts = getHexPoints(cx, cy, HEX_SIZE * 0.52);
+          ctx.beginPath();
+          ctx.moveTo(pts[0][0], pts[0][1]);
+          for (let i = 1; i < 6; i++) ctx.lineTo(pts[i][0], pts[i][1]);
+          ctx.closePath();
+          ctx.stroke();
+
+          // Occasional glowing hex vertex dot
+          if ((col + row) % 7 === 0) {
+            const dotAlpha = 0.15 + pulse * 0.25;
             ctx.beginPath();
-            ctx.moveTo(nodes[i].x, nodes[i].y);
-            ctx.lineTo(nodes[j].x, nodes[j].y);
-            ctx.stroke();
+            ctx.arc(cx, cy, 1.5, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(38, 210, 220, ${dotAlpha})`;
+            ctx.fill();
           }
         }
       }
-
-      // — Neuron nodes with pulsing glow —
-      nodes.forEach((n) => {
-        n.phase += n.phaseSpeed;
-        const pulse = 1 + Math.sin(n.phase) * 0.28;
-        const r = n.size * pulse;
-        const alpha = 0.55 + Math.sin(n.phase) * 0.18;
-
-        // Glow via shadow
-        ctx.shadowBlur = 16;
-        ctx.shadowColor = `rgba(${NODE_COLORS[n.colorIdx]}, 0.80)`;
-        ctx.beginPath();
-        ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${NODE_COLORS[n.colorIdx]}, ${alpha})`;
-        ctx.fill();
-        ctx.shadowBlur = 0;
-
-        // Move & bounce
-        n.x += n.vx;
-        n.y += n.vy;
-        if (n.x < 0 || n.x > canvas.width)  n.vx *= -1;
-        if (n.y < 0 || n.y > canvas.height) n.vy *= -1;
-      });
 
       animId = requestAnimationFrame(draw);
     };
