@@ -23,7 +23,7 @@ const ParticleBackground = () => {
     const stars = Array.from({ length: 220 }, () => ({
       x: Math.random(),
       y: Math.random(),
-      r: Math.random() * 1.6 + 0.2,
+      r: Math.random() * 2.8 + 0.8,
       speed: Math.random() * 0.00012 + 0.00004,
       twinkle: Math.random() * Math.PI * 2,
       twinkleSpeed: 0.02 + Math.random() * 0.03,
