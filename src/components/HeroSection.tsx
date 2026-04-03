@@ -1,11 +1,91 @@
 import { motion } from "framer-motion";
 import { Download, FolderOpen } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import profilePhoto from "@/assets/profile-photo.png";
+import { useTheme } from "@/components/ThemeProvider";
 
 const TYPED_STRINGS = ["Machine Learning Engineer", "AI Enthusiast", "Problem Solver"];
 
+// ── Animated background canvas ──────────────────────────────────────────────
+const FrameCanvas = ({ isDark }: { isDark: boolean }) => {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current!;
+    const ctx = canvas.getContext("2d")!;
+    const W = canvas.width = canvas.offsetWidth;
+    const H = canvas.height = canvas.offsetHeight;
+
+    type Particle = {
+      x: number; y: number; vx: number; vy: number;
+      size: number; opacity: number; rotation: number; rotSpeed: number;
+      color?: string;
+    };
+
+    const count = 28;
+    const particles: Particle[] = Array.from({ length: count }, () => ({
+      x: Math.random() * W,
+      y: Math.random() * H - H,
+      vx: (Math.random() - 0.5) * 0.6,
+      vy: Math.random() * 0.8 + 0.3,
+      size: Math.random() * 8 + 5,
+      opacity: Math.random() * 0.6 + 0.3,
+      rotation: Math.random() * Math.PI * 2,
+      rotSpeed: (Math.random() - 0.5) * 0.04,
+      color: isDark ? undefined : ["#f9a8d4", "#fda4af", "#f0abfc", "#fbcfe8", "#e9d5ff"][Math.floor(Math.random() * 5)],
+    }));
+
+    let raf: number;
+
+    const drawPetal = (p: Particle) => {
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.rotation);
+      ctx.globalAlpha = p.opacity;
+      if (isDark) {
+        // glowing star/orb
+        const grad = ctx.createRadialGradient(0, 0, 0, 0, 0, p.size);
+        grad.addColorStop(0, "rgba(56,189,248,0.9)");
+        grad.addColorStop(0.5, "rgba(99,102,241,0.5)");
+        grad.addColorStop(1, "rgba(99,102,241,0)");
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        ctx.arc(0, 0, p.size, 0, Math.PI * 2);
+        ctx.fill();
+      } else {
+        // rose petal shape
+        ctx.fillStyle = p.color!;
+        ctx.beginPath();
+        ctx.ellipse(0, -p.size / 2, p.size * 0.45, p.size * 0.7, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.ellipse(p.size * 0.3, 0, p.size * 0.45, p.size * 0.7, Math.PI / 3, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.restore();
+    };
+
+    const tick = () => {
+      ctx.clearRect(0, 0, W, H);
+      for (const p of particles) {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.rotation += p.rotSpeed;
+        if (p.y > H + 20) { p.y = -20; p.x = Math.random() * W; }
+        drawPetal(p);
+      }
+      raf = requestAnimationFrame(tick);
+    };
+    tick();
+    return () => cancelAnimationFrame(raf);
+  }, [isDark]);
+
+  return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />;
+};
+
 const HeroSection = () => {
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
   const [displayed, setDisplayed] = useState("");
   const [strIdx, setStrIdx] = useState(0);
   const [charIdx, setCharIdx] = useState(0);
@@ -93,23 +173,26 @@ const HeroSection = () => {
             </div>
           </motion.div>
 
-          {/* Right — Arch Photo */}
+          {/* Right — Square Photo Frame with live animation */}
           <motion.div
             initial={{ x: 60, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.7 }}
             className="flex justify-center md:justify-end order-1 md:order-2"
           >
-            <div className="relative">
-              <div className="absolute inset-0 blur-3xl opacity-25 bg-primary scale-90 rounded-full" />
-              <div
-                className="relative overflow-hidden shadow-2xl"
-                style={{
-                  width: "min(380px, 80vw)",
-                  height: "min(520px, 110vw)",
-                  borderRadius: "min(190px, 40vw) min(190px, 40vw) 20px 20px",
-                }}
-              >
+            <div className="relative" style={{ width: "min(460px, 88vw)", height: "min(460px, 88vw)" }}>
+              {/* Animated background */}
+              <div className={`absolute inset-0 rounded-2xl overflow-hidden ${isDark ? "bg-[hsl(215,42%,8%)]" : "bg-pink-50"}`}>
+                <FrameCanvas isDark={isDark} />
+              </div>
+
+              {/* Glowing border */}
+              <div className={`absolute inset-0 rounded-2xl ${isDark ? "shadow-[0_0_30px_4px_rgba(56,189,248,0.25)]" : "shadow-[0_0_30px_4px_rgba(249,168,212,0.5)]"}`}
+                style={{ border: isDark ? "2px solid rgba(56,189,248,0.35)" : "2px solid rgba(249,168,212,0.7)" }}
+              />
+
+              {/* Photo */}
+              <div className="absolute inset-4 rounded-xl overflow-hidden shadow-xl">
                 <img
                   src={profilePhoto}
                   alt="Donipati Anu Kumari"
